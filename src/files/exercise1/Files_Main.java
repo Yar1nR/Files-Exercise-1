@@ -40,7 +40,17 @@ public class Files_Main {
 				
 				// Matching IDs and write the student's details and average grade
 				if (csID == hedvaID) {
-					int averageGrades = (Integer.parseInt(hedvaWords[1]) + Integer.parseInt(hedvaWords[2]))/2;
+					int grade1 = Integer.parseInt(hedvaWords[1]);
+					int grade2 = Integer.parseInt(hedvaWords[2]);
+					long total = (long) grade1 + grade2;
+
+					String averageGrades;
+					if (total % 2 == 0) {
+					    averageGrades = Long.toString(total / 2);
+					} else {
+					    averageGrades = String.format(java.util.Locale.ROOT, "%.1f", total / 2.0);
+					}		
+					
 					String toReportFile = csWords[2] + " " + csWords[0] + " " + csWords[1] + " " + averageGrades + "\n";
 					Files.writeString(reportFile,toReportFile ,StandardOpenOption.APPEND);
 					lineCS = readerCS.readLine();
